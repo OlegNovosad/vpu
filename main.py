@@ -1,4 +1,6 @@
 from level_select import show_levels_select
+from game_manager import GameManager
+from game_state import GameState
 
 def intro():
     """Function asks for user name to play game."""
@@ -11,15 +13,18 @@ def show_game_info(title, version):
     """Shows game info to the user"""
     print(f"{title} v{version}")
 
-game_title = "My game"
-game_version = 1.0
-
 # Show game info
-show_game_info(game_title, game_version)
+game_manager = GameManager("My game", 1)
+game_manager.start()
 
-# Show user intro
-intro()
+if game_manager.game_state == GameState.START:
+    print(game_manager.game_state)
+    
+    # Show user intro
+    intro()
 
-# Ask user to select game level
-level = show_levels_select()
-print(f'Ви вибрали рівень: {level}')
+    # Ask user to select game level
+    level = show_levels_select()
+    print(f'Ви вибрали рівень: {level}')
+else:
+    print("Game already started.")
